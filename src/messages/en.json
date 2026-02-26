@@ -1,0 +1,52 @@
+{
+  "common": {
+    "appName": "Idea2Startup",
+    "loading": "Loading...",
+    "error": "Something went wrong",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "back": "Back"
+  },
+  "auth": {
+    "login": "Log in",
+    "signup": "Sign up",
+    "logout": "Log out",
+    "email": "Email",
+    "password": "Password",
+    "loginWithGoogle": "Continue with Google",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "checkEmail": "Check your email for the confirmation link"
+  },
+  "landing": {
+    "hero": "Turn your ideas into validated startups",
+    "subtitle": "AI-powered platform that guides you from raw idea to business plan with real market data",
+    "cta": "Get Started"
+  },
+  "dashboard": {
+    "title": "My Ideas",
+    "newIdea": "New Idea",
+    "noIdeas": "No ideas yet. Start brainstorming!",
+    "score": "Score",
+    "stage": "Stage",
+    "archived": "Archived"
+  },
+  "stages": {
+    "capture": "Idea Capture",
+    "research": "Market Research",
+    "competitors": "Competitor Analysis",
+    "uvp": "Unique Value",
+    "canvas": "Business Model",
+    "scoring": "Scoring"
+  },
+  "sidebar": {
+    "ideas": "Ideas",
+    "settings": "Settings",
+    "newIdea": "New Idea"
+  },
+  "workspace": {
+    "chatPlaceholder": "Describe your startup idea...",
+    "send": "Send"
+  }
+}
