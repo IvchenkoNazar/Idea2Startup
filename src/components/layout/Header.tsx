@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -32,8 +33,9 @@ export function Header({ user }: { user: { email?: string; name?: string } | nul
   return (
     <header className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="flex h-14 items-center justify-between px-4">
-        <Link href="/dashboard" className="text-lg font-bold">
-          {t("common.appName")}
+        <Link href="/dashboard" className="flex items-center gap-2">
+          <Image src="/logo.svg" alt="Idea2Startup" width={32} height={32} />
+          <span className="text-lg font-bold">{t("common.appName")}</span>
         </Link>
 
         <div className="flex items-center gap-2">

@@ -68,7 +68,9 @@
     "emptyTitle": "Dashboard is empty",
     "emptyHint": "Start chatting and AI will populate cards here automatically",
     "mobileChat": "Chat",
-    "mobileDashboard": "Dashboard"
+    "mobileDashboard": "Dashboard",
+    "noCompetitors": "No direct competitors found",
+    "noCompetitorsHint": "This could be a blue ocean opportunity or an untapped market"
   },
   "workspace": {
     "chatPlaceholder": "Describe your startup idea...",

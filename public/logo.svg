@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#818cf8"/>
+      <stop offset="1" stop-color="#7c3aed"/>
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="40" height="40" rx="10" fill="url(#bg)"/>
+  <!-- Lightbulb glass -->
+  <path d="M20 5c-5.5 0-10 4.5-10 10 0 3.7 2 7 5 8.7V27h10v-3.3c3-1.7 5-5 5-8.7 0-5.5-4.5-10-10-10z" fill="white" opacity="0.92"/>
+  <!-- Base lines -->
+  <rect x="15" y="27.5" width="10" height="2" rx="1" fill="white" opacity="0.85"/>
+  <rect x="16.5" y="30.5" width="7" height="1.8" rx="0.9" fill="white" opacity="0.6"/>
+  <!-- Arrow up (golden) inside bulb -->
+  <path d="M20 9l-3.5 6h2.5v5h2v-5h2.5z" fill="#fbbf24"/>
+</svg>

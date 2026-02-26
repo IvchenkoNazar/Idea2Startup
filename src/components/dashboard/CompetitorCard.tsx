@@ -29,6 +29,13 @@ export function CompetitorCard({ data }: Props) {
         </CardTitle>
       </CardHeader>
       <CardContent className="space-y-4">
+        {(data.competitors ?? []).length === 0 && (
+          <div className="flex flex-col items-center justify-center py-6 text-center">
+            <div className="text-3xl mb-2">🎯</div>
+            <p className="text-sm font-medium">{t("noCompetitors")}</p>
+            <p className="text-xs text-muted-foreground mt-1">{t("noCompetitorsHint")}</p>
+          </div>
+        )}
         {(data.competitors ?? []).map((c) => (
           <div key={c.name} className="rounded-lg border p-3 space-y-2">
             <div className="flex items-start justify-between gap-2">

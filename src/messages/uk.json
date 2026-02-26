@@ -68,7 +68,9 @@
     "emptyTitle": "Dashboard порожній",
     "emptyHint": "Почніть спілкуватись з AI і картки з'являться автоматично",
     "mobileChat": "Чат",
-    "mobileDashboard": "Dashboard"
+    "mobileDashboard": "Dashboard",
+    "noCompetitors": "Прямих конкурентів не знайдено",
+    "noCompetitorsHint": "Це може бути незайнята ніша або новий ринок без конкуренції"
   },
   "workspace": {
     "chatPlaceholder": "Опишіть вашу стартап-ідею...",
