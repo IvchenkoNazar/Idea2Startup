@@ -23,6 +23,7 @@ export function AppShell({
   ideas: IdeaItem[];
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <div className="flex h-screen flex-col">
@@ -30,7 +31,7 @@ export function AppShell({
       <div className="flex flex-1 overflow-hidden">
         {/* Desktop sidebar */}
         <div className="hidden md:block">
-          <Sidebar ideas={ideas} />
+          <Sidebar ideas={ideas} collapsed={collapsed} onToggle={() => setCollapsed((v) => !v)} />
         </div>
 
         {/* Mobile sidebar */}
