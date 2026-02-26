@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
@@ -61,11 +62,31 @@ export function CollapsibleCard({
 }
 
 function InfoTooltip({ text }: { text: string }) {
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const [visible, setVisible] = useState(false);
+  const [pos, setPos] = useState({ top: 0, right: 0 });
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true); }, []);
+
+  function handleMouseEnter() {
+    if (!triggerRef.current) return;
+    const rect = triggerRef.current.getBoundingClientRect();
+    setPos({
+      top: rect.top,
+      right: window.innerWidth - rect.right,
+    });
+    setVisible(true);
+  }
+
   return (
-    <div className="relative group/tooltip">
+    <>
       <button
+        ref={triggerRef}
         type="button"
         onClick={(e) => e.stopPropagation()}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={() => setVisible(false)}
         className="flex h-4 w-4 items-center justify-center rounded-full border border-muted-foreground/30 text-muted-foreground/60 hover:text-muted-foreground hover:border-muted-foreground/60 transition-colors cursor-help"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -74,14 +95,23 @@ function InfoTooltip({ text }: { text: string }) {
         </svg>
       </button>
 
-      {/* Popup: renders above the icon, outside any overflow-hidden parent */}
-      <div className="absolute bottom-full right-0 mb-2 w-56 rounded-lg border bg-popover shadow-xl text-xs p-2.5 text-popover-foreground opacity-0 group-hover/tooltip:opacity-100 pointer-events-none transition-opacity duration-150 z-[200] leading-relaxed">
-        {text}
-        {/* Arrow */}
-        <div className="absolute top-full right-2.5 border-[5px] border-transparent border-t-border" />
-        <div className="absolute top-full right-[11px] border-[4px] border-transparent border-t-popover" />
-      </div>
-    </div>
+      {mounted && visible && createPortal(
+        <div
+          style={{
+            position: "fixed",
+            bottom: `${window.innerHeight - pos.top + 8}px`,
+            right: `${pos.right}px`,
+            zIndex: 9999,
+          }}
+          className="w-56 rounded-lg border bg-popover shadow-xl text-xs p-2.5 text-popover-foreground leading-relaxed pointer-events-none animate-in fade-in duration-100"
+        >
+          {text}
+          <div className="absolute top-full right-2 border-[5px] border-transparent border-t-border" />
+          <div className="absolute top-full right-[9px] border-[4px] border-transparent border-t-popover" />
+        </div>,
+        document.body
+      )}
+    </>
   );
 }
 
