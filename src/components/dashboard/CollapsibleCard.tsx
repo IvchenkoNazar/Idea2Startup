@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -22,19 +22,23 @@ export function CollapsibleCard({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <Card>
-      <CardHeader className="pb-3 cursor-pointer select-none" onClick={() => setOpen((v) => !v)}>
+    <Card className="overflow-hidden shadow-sm">
+      <button
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        className="w-full text-left bg-gradient-to-r from-muted/60 to-muted/20 hover:from-muted/80 hover:to-muted/40 transition-colors px-4 py-3 border-b border-border/50"
+      >
         <div className="flex items-center justify-between gap-2">
-          <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+          <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider select-none">
             {title}
-          </CardTitle>
+          </span>
           <div className="flex items-center gap-2 shrink-0">
             {extra}
             <Chevron open={open} />
           </div>
         </div>
-      </CardHeader>
-      {open && <CardContent className={contentClassName}>{children}</CardContent>}
+      </button>
+      {open && <CardContent className={cn("pt-4", contentClassName)}>{children}</CardContent>}
     </Card>
   );
 }
@@ -43,12 +47,11 @@ function Chevron({ open }: { open: boolean }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="14"
-      height="14"
+      width="14" height="14"
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       className={cn("transition-transform duration-200 text-muted-foreground", !open && "-rotate-90")}
