@@ -3,6 +3,10 @@
 import { useState, useCallback, useRef } from "react";
 import type { Message, ArtifactUpdate } from "@/types/chat";
 
+function stripArtifacts(text: string): string {
+  return text.replace(/<artifact[\s\S]*?<\/artifact>/g, "").replace(/\n{3,}/g, "\n\n").trim();
+}
+
 type UseChatOptions = {
   ideaId: string;
   locale: string;
@@ -79,7 +83,7 @@ export function useChat({
 
                 if (eventType === "text") {
                   accumulated += data.text;
-                  setStreamingContent(accumulated);
+                  setStreamingContent(stripArtifacts(accumulated));
                 } else if (eventType === "tool_start") {
                   setSearchingTool(data.name);
                 } else if (eventType === "artifact") {
@@ -92,7 +96,7 @@ export function useChat({
                     {
                       id: crypto.randomUUID(),
                       role: "assistant",
-                      content: accumulated,
+                      content: stripArtifacts(accumulated),
                     },
                   ]);
                   setStreamingContent("");
