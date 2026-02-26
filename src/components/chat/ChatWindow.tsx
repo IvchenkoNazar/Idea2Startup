@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { MessageBubble } from "./MessageBubble";
 import { ChatInput } from "./ChatInput";
 import type { Message, ArtifactUpdate } from "@/types/chat";
@@ -38,7 +37,7 @@ export function ChatWindow({ ideaId, locale, ideaTitle, initialMessages, onArtif
   return (
     <div className="flex h-screen flex-col bg-muted/30">
       {/* Chat area */}
-      <ScrollArea className="flex-1 px-4 py-6">
+      <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6">
         <div className="max-w-2xl mx-auto">
           {isEmpty ? (
             <WelcomeScreen ideaTitle={ideaTitle} onSend={sendMessage} />
@@ -54,7 +53,7 @@ export function ChatWindow({ ideaId, locale, ideaTitle, initialMessages, onArtif
             </div>
           )}
         </div>
-      </ScrollArea>
+      </div>
 
       {/* Input */}
       <div className="bg-background border-t">
