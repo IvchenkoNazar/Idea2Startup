@@ -46,12 +46,13 @@ const colorMap: Record<string, string> = {
   orange: "text-orange-600",
 };
 
-function Section({ title, items, color }: { title: string; items: string[] | undefined; color: string }) {
+function Section({ title, items, color }: { title: string; items: unknown; color: string }) {
+  const list = Array.isArray(items) ? items : items ? [String(items)] : [];
   return (
     <div className="rounded-lg border p-2">
       <p className={`font-semibold mb-1 ${colorMap[color]}`}>{title}</p>
       <ul className="space-y-0.5">
-        {(items ?? []).map((item) => <li key={item} className="text-muted-foreground">• {item}</li>)}
+        {list.map((item) => <li key={String(item)} className="text-muted-foreground">• {String(item)}</li>)}
       </ul>
     </div>
   );

@@ -5,6 +5,12 @@ import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { CollapsibleCard } from "./CollapsibleCard";
 
+function toArray(val: unknown): string[] {
+  if (Array.isArray(val)) return val.map(String);
+  if (val) return [String(val)];
+  return [];
+}
+
 type Competitor = {
   name: string;
   url: string;
@@ -50,13 +56,13 @@ export function CompetitorCard({ data }: Props) {
             <div>
               <p className="text-xs font-medium text-green-600 mb-1">✓ {t("strengths")}</p>
               <ul className="space-y-0.5">
-                {c.strengths.map((s) => <li key={s} className="text-xs text-muted-foreground">• {s}</li>)}
+                {toArray(c.strengths).map((s) => <li key={s} className="text-xs text-muted-foreground">• {s}</li>)}
               </ul>
             </div>
             <div>
               <p className="text-xs font-medium text-red-500 mb-1">✗ {t("weaknesses")}</p>
               <ul className="space-y-0.5">
-                {c.weaknesses.map((w) => <li key={w} className="text-xs text-muted-foreground">• {w}</li>)}
+                {toArray(c.weaknesses).map((w) => <li key={w} className="text-xs text-muted-foreground">• {w}</li>)}
               </ul>
             </div>
           </div>
