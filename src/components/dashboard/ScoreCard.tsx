@@ -1,8 +1,8 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { CollapsibleCard } from "./CollapsibleCard";
 
 type Criterion = {
   name: string;
@@ -25,49 +25,42 @@ export function ScoreCard({ data }: Props) {
   const color = data.total >= 70 ? "text-green-600" : data.total >= 50 ? "text-yellow-600" : "text-red-500";
 
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          📊 {t("score")}
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
-        <div className="flex items-center justify-center py-4">
-          <div className="text-center">
-            <p className={`text-6xl font-bold ${color}`}>{data.total}</p>
-            <p className="text-sm text-muted-foreground mt-1">{t("outOf")}</p>
-          </div>
+    <CollapsibleCard title={<>📊 {t("score")}</>}>
+      <div className="flex items-center justify-center py-4">
+        <div className="text-center">
+          <p className={`text-6xl font-bold ${color}`}>{data.total}</p>
+          <p className="text-sm text-muted-foreground mt-1">{t("outOf")}</p>
         </div>
-        <div className="space-y-3">
-          {(data.criteria ?? []).map((c) => (
-            <div key={c.name}>
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-xs font-medium">{c.name}</span>
-                <span className="text-xs text-muted-foreground">{c.score}/100</span>
-              </div>
-              <Progress value={c.score} className="h-1.5" />
-              <p className="text-xs text-muted-foreground mt-1">{c.explanation}</p>
+      </div>
+      <div className="space-y-3">
+        {(data.criteria ?? []).map((c) => (
+          <div key={c.name}>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-xs font-medium">{c.name}</span>
+              <span className="text-xs text-muted-foreground">{c.score}/100</span>
             </div>
-          ))}
-        </div>
-        <div className="rounded-lg bg-muted/50 p-3">
-          <p className="text-xs font-semibold mb-1">{t("verdict")}</p>
-          <p className="text-sm text-muted-foreground">{data.verdict}</p>
-        </div>
-        {(data.recommendations ?? []).length > 0 && (
-          <div>
-            <p className="text-xs font-semibold mb-2">{t("nextSteps")}</p>
-            <ul className="space-y-1">
-              {data.recommendations.map((r, i) => (
-                <li key={i} className="text-xs text-muted-foreground flex gap-2">
-                  <span className="text-primary font-bold">{i + 1}.</span>
-                  {r}
-                </li>
-              ))}
-            </ul>
+            <Progress value={c.score} className="h-1.5" />
+            <p className="text-xs text-muted-foreground mt-1">{c.explanation}</p>
           </div>
-        )}
-      </CardContent>
-    </Card>
+        ))}
+      </div>
+      <div className="rounded-lg bg-muted/50 p-3">
+        <p className="text-xs font-semibold mb-1">{t("verdict")}</p>
+        <p className="text-sm text-muted-foreground">{data.verdict}</p>
+      </div>
+      {(data.recommendations ?? []).length > 0 && (
+        <div>
+          <p className="text-xs font-semibold mb-2">{t("nextSteps")}</p>
+          <ul className="space-y-1">
+            {data.recommendations.map((r, i) => (
+              <li key={i} className="text-xs text-muted-foreground flex gap-2">
+                <span className="text-primary font-bold">{i + 1}.</span>
+                {r}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </CollapsibleCard>
   );
 }

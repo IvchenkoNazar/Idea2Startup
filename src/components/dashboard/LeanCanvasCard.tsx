@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CollapsibleCard } from "./CollapsibleCard";
 
 type Props = {
   data: {
@@ -20,28 +20,21 @@ type Props = {
 export function LeanCanvasCard({ data }: Props) {
   const t = useTranslations("artifacts");
   return (
-    <Card>
-      <CardHeader className="pb-3">
-        <CardTitle className="text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-          📋 {t("leanCanvas")}
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-2 gap-2 text-xs">
-          <Section title="Problem" items={data.problem} color="red" />
-          <Section title="Solution" items={data.solution} color="green" />
-          <Section title="Key Metrics" items={data.keyMetrics} color="blue" />
-          <Section title="Channels" items={data.channels} color="purple" />
-          <Section title="Customer Segments" items={data.customerSegments} color="orange" />
-          <Section title="Revenue Streams" items={data.revenueStreams} color="green" />
-          <Section title="Cost Structure" items={data.costStructure} color="red" />
-          <div className="rounded-lg border p-2">
-            <p className="font-semibold text-yellow-600 mb-1">⭐ {t("unfairAdvantage")}</p>
-            <p className="text-muted-foreground">{data.unfairAdvantage}</p>
-          </div>
+    <CollapsibleCard title={<>📋 {t("leanCanvas")}</>} contentClassName="">
+      <div className="grid grid-cols-2 gap-2 text-xs">
+        <Section title="Problem" items={data.problem} color="red" />
+        <Section title="Solution" items={data.solution} color="green" />
+        <Section title="Key Metrics" items={data.keyMetrics} color="blue" />
+        <Section title="Channels" items={data.channels} color="purple" />
+        <Section title="Customer Segments" items={data.customerSegments} color="orange" />
+        <Section title="Revenue Streams" items={data.revenueStreams} color="green" />
+        <Section title="Cost Structure" items={data.costStructure} color="red" />
+        <div className="rounded-lg border p-2">
+          <p className="font-semibold text-yellow-600 mb-1">⭐ {t("unfairAdvantage")}</p>
+          <p className="text-muted-foreground">{data.unfairAdvantage}</p>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </CollapsibleCard>
   );
 }
 
