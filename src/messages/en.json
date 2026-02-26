@@ -27,7 +27,9 @@
   "dashboard": {
     "title": "My Ideas",
     "newIdea": "New Idea",
-    "noIdeas": "No ideas yet. Start brainstorming!",
+    "newIdeaPlaceholder": "Name your idea... (e.g. AI startup validator)",
+    "noIdeas": "No ideas yet.",
+    "noIdeasHint": "Type your idea above and press Enter to start brainstorming!",
     "score": "Score",
     "stage": "Stage",
     "archived": "Archived"
@@ -47,6 +49,11 @@
   },
   "workspace": {
     "chatPlaceholder": "Describe your startup idea...",
-    "send": "Send"
+    "send": "Send",
+    "welcomeSubtitle": "I'm your AI startup advisor. Describe your idea and I'll help you validate it, analyze the market, and build a business plan.",
+    "prompt1": "Tell me about the problem you're solving",
+    "prompt2": "Who is your target customer?",
+    "prompt3": "What makes this idea unique?",
+    "prompt4": "Have you seen any competitors?"
   }
 }
