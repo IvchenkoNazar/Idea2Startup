@@ -17,7 +17,7 @@ export function LiveDashboard({ artifacts }: Props) {
   const hasAny = Object.keys(artifacts).length > 0;
 
   return (
-    <div className="h-screen flex flex-col border-l bg-background">
+    <div className="h-full flex flex-col border-l bg-background">
       <div className="px-4 py-3 border-b">
         <h2 className="text-sm font-semibold">{t("liveTitle")}</h2>
         <p className="text-xs text-muted-foreground">{t("liveSubtitle")}</p>

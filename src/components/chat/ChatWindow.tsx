@@ -35,7 +35,7 @@ export function ChatWindow({ ideaId, locale, ideaTitle, initialMessages, onArtif
   const isEmpty = messages.length === 0 && !streamingContent;
 
   return (
-    <div className="flex h-screen flex-col bg-muted/30">
+    <div className="flex h-full flex-col bg-muted/30">
       {/* Chat area */}
       <div className="flex-1 min-h-0 overflow-y-auto px-4 py-6">
         <div className="max-w-2xl mx-auto">

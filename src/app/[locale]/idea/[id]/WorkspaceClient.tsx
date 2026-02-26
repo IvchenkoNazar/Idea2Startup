@@ -34,7 +34,7 @@ export function WorkspaceClient({
   return (
     <>
       {/* Desktop: split view */}
-      <div className="hidden md:flex h-screen">
+      <div className="hidden md:flex h-full">
         <div className="flex-1 min-w-0">
           <ChatWindow
             ideaId={ideaId}
@@ -50,7 +50,7 @@ export function WorkspaceClient({
       </div>
 
       {/* Mobile: tabs */}
-      <div className="flex md:hidden h-screen flex-col">
+      <div className="flex md:hidden h-full flex-col">
         <Tabs defaultValue="chat" className="flex flex-col flex-1">
           <TabsList className="mx-4 mt-2">
             <TabsTrigger value="chat" className="flex-1">{t("mobileChat")}</TabsTrigger>
