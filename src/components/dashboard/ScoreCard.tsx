@@ -75,19 +75,27 @@ export function ScoreCard({ data }: Props) {
       {criteria.length > 0 && (
         <div className="space-y-3">
           {criteria.map((c, i) => {
-            const s = Number(c.score) || 0;
+            const raw = c as Record<string, unknown>;
+            const name = String(raw.name ?? raw.criterion ?? raw.criteria ?? raw.title ?? raw.label ?? raw.category ?? `Criterion ${i + 1}`);
+            const s = Number(raw.score ?? raw.value ?? raw.points ?? 0);
+            const explanation = String(raw.explanation ?? raw.description ?? raw.reason ?? raw.comment ?? "");
+            const weight = raw.weight != null ? `${Math.round(Number(raw.weight) * 100)}%` : null;
             const barColor = s >= 70 ? "bg-green-500" : s >= 50 ? "bg-yellow-500" : "bg-red-500";
+            const scoreColor = s >= 70 ? "text-green-600" : s >= 50 ? "text-yellow-600" : "text-red-600";
             return (
-              <div key={i}>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-medium">{c.name}</span>
-                  <span className="text-xs font-semibold tabular-nums">{s}/100</span>
+              <div key={i} className="rounded-lg border bg-muted/10 p-2.5">
+                <div className="flex items-center justify-between mb-1.5">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-semibold">{name}</span>
+                    {weight && <span className="text-[10px] text-muted-foreground bg-muted px-1 rounded">×{weight}</span>}
+                  </div>
+                  <span className={`text-sm font-bold tabular-nums ${scoreColor}`}>{s}<span className="text-xs font-normal text-muted-foreground">/100</span></span>
                 </div>
-                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
+                <div className="h-2 w-full rounded-full bg-muted overflow-hidden">
                   <div className={`h-full rounded-full transition-all duration-700 ${barColor}`} style={{ width: `${s}%` }} />
                 </div>
-                {c.explanation && (
-                  <p className="text-xs text-muted-foreground mt-1">{c.explanation}</p>
+                {explanation && (
+                  <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">{explanation}</p>
                 )}
               </div>
             );
