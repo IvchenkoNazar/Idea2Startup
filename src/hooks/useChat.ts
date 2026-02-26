@@ -4,7 +4,11 @@ import { useState, useCallback, useRef } from "react";
 import type { Message, ArtifactUpdate } from "@/types/chat";
 
 function stripArtifacts(text: string): string {
-  return text.replace(/<artifact[\s\S]*?<\/artifact>/g, "").replace(/\n{3,}/g, "\n\n").trim();
+  // Remove complete artifact blocks
+  let result = text.replace(/<artifact[\s\S]*?<\/artifact>/g, "");
+  // Remove incomplete artifact block still being streamed (no closing tag yet)
+  result = result.replace(/<artifact[\s\S]*$/, "");
+  return result.replace(/\n{3,}/g, "\n\n").trim();
 }
 
 type UseChatOptions = {
