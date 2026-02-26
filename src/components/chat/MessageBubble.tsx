@@ -1,4 +1,5 @@
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -31,6 +32,7 @@ export function MessageBubble({ role, content, isStreaming }: Props) {
         )}
       >
         <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
           components={{
             p: ({ children }) => <p className="mb-2 last:mb-0">{children}</p>,
             ul: ({ children }) => <ul className="mb-2 ml-4 list-disc">{children}</ul>,
@@ -41,6 +43,18 @@ export function MessageBubble({ role, content, isStreaming }: Props) {
               <code className="rounded bg-black/10 px-1 py-0.5 text-xs font-mono">
                 {children}
               </code>
+            ),
+            table: ({ children }) => (
+              <div className="overflow-x-auto my-2">
+                <table className="w-full text-xs border-collapse">{children}</table>
+              </div>
+            ),
+            thead: ({ children }) => <thead className="bg-black/10">{children}</thead>,
+            th: ({ children }) => (
+              <th className="border border-black/20 px-2 py-1 text-left font-semibold">{children}</th>
+            ),
+            td: ({ children }) => (
+              <td className="border border-black/20 px-2 py-1">{children}</td>
             ),
           }}
         >
