@@ -30,6 +30,7 @@ export function useChat({
   const [isLoading, setIsLoading] = useState(false);
   const [streamingContent, setStreamingContent] = useState("");
   const [searchingTool, setSearchingTool] = useState<string | null>(null);
+  const [generatingArtifact, setGeneratingArtifact] = useState<string | null>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   const sendMessage = useCallback(
@@ -88,6 +89,15 @@ export function useChat({
                 if (eventType === "text") {
                   accumulated += data.text;
                   setStreamingContent(stripArtifacts(accumulated));
+                  // Detect if we're currently inside an artifact block
+                  const lastOpen = accumulated.lastIndexOf("<artifact");
+                  const lastClose = accumulated.lastIndexOf("</artifact>");
+                  if (lastOpen > lastClose) {
+                    const typeMatch = accumulated.slice(lastOpen).match(/type="([^"]+)"/);
+                    setGeneratingArtifact(typeMatch ? typeMatch[1] : "unknown");
+                  } else {
+                    setGeneratingArtifact(null);
+                  }
                 } else if (eventType === "tool_start") {
                   setSearchingTool(data.name);
                 } else if (eventType === "artifact") {
@@ -95,6 +105,7 @@ export function useChat({
                   onArtifact?.({ type: data.type, data: data.data });
                 } else if (eventType === "done") {
                   setSearchingTool(null);
+                  setGeneratingArtifact(null);
                   setMessages((prev) => [
                     ...prev,
                     {
@@ -129,6 +140,7 @@ export function useChat({
         setIsLoading(false);
         setStreamingContent("");
         setSearchingTool(null);
+        setGeneratingArtifact(null);
       }
     },
     [ideaId, locale, input, isLoading, onArtifact]
@@ -147,6 +159,7 @@ export function useChat({
     isLoading,
     streamingContent,
     searchingTool,
+    generatingArtifact,
     sendMessage,
     stop,
   };

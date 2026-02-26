@@ -69,6 +69,7 @@
     "emptyHint": "Start chatting and AI will populate cards here automatically",
     "mobileChat": "Chat",
     "mobileDashboard": "Dashboard",
+    "generatingArtifact": "Generating",
     "noCompetitors": "No direct competitors found",
     "noCompetitorsHint": "This could be a blue ocean opportunity or an untapped market"
   },

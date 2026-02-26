@@ -24,6 +24,7 @@ export function ChatWindow({ ideaId, locale, ideaTitle, initialMessages, onArtif
     isLoading,
     streamingContent,
     searchingTool,
+    generatingArtifact,
     sendMessage,
     stop,
   } = useChat({ ideaId, locale, initialMessages, onArtifact });
@@ -49,6 +50,9 @@ export function ChatWindow({ ideaId, locale, ideaTitle, initialMessages, onArtif
               {streamingContent && (
                 <MessageBubble role="assistant" content={streamingContent} isStreaming />
               )}
+              {generatingArtifact && (
+                <ArtifactIndicator type={generatingArtifact} />
+              )}
               <div ref={bottomRef} />
             </div>
           )}
@@ -67,6 +71,39 @@ export function ChatWindow({ ideaId, locale, ideaTitle, initialMessages, onArtif
             searchingTool={searchingTool}
           />
         </div>
+      </div>
+    </div>
+  );
+}
+
+const ARTIFACT_META: Record<string, { icon: string; key: string }> = {
+  idea_summary: { icon: "💡", key: "ideaSummary" },
+  competitors:  { icon: "🔍", key: "competitors" },
+  uvp:          { icon: "💎", key: "uvp" },
+  lean_canvas:  { icon: "📋", key: "leanCanvas" },
+  score:        { icon: "📊", key: "score" },
+};
+
+function ArtifactIndicator({ type }: { type: string }) {
+  const t = useTranslations("artifacts");
+  const meta = ARTIFACT_META[type];
+  const label = meta ? `${meta.icon} ${t(meta.key as Parameters<typeof t>[0])}` : type;
+
+  return (
+    <div className="flex gap-3">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted text-xs font-bold text-muted-foreground">
+        AI
+      </div>
+      <div className="flex items-center gap-2 rounded-2xl rounded-tl-sm bg-muted px-4 py-2.5 text-sm text-foreground">
+        <span className="animate-spin text-base">⚙️</span>
+        <span className="text-muted-foreground">
+          {t("generatingArtifact")} <span className="font-medium text-foreground">{label}</span>
+        </span>
+        <span className="flex gap-0.5 ml-1">
+          <span className="animate-bounce [animation-delay:0ms] text-muted-foreground">·</span>
+          <span className="animate-bounce [animation-delay:150ms] text-muted-foreground">·</span>
+          <span className="animate-bounce [animation-delay:300ms] text-muted-foreground">·</span>
+        </span>
       </div>
     </div>
   );
