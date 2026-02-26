@@ -20,7 +20,7 @@ type Props = {
 export function LeanCanvasCard({ data }: Props) {
   const t = useTranslations("artifacts");
   return (
-    <CollapsibleCard title={<>📋 {t("leanCanvas")}</>} contentClassName="">
+    <CollapsibleCard title={<>📋 {t("leanCanvas")}</>} tooltip={t("leanCanvasTooltip")} contentClassName="">
       <div className="grid grid-cols-2 gap-2 text-xs">
         <Section title="Problem" items={data.problem} color="red" />
         <Section title="Solution" items={data.solution} color="green" />
@@ -47,12 +47,12 @@ const colorMap: Record<string, string> = {
 };
 
 function Section({ title, items, color }: { title: string; items: unknown; color: string }) {
-  const list = Array.isArray(items) ? items : items ? [String(items)] : [];
+  const list = Array.isArray(items) ? items.map(String) : items ? [String(items)] : [];
   return (
     <div className="rounded-lg border p-2">
       <p className={`font-semibold mb-1 ${colorMap[color]}`}>{title}</p>
       <ul className="space-y-0.5">
-        {list.map((item) => <li key={String(item)} className="text-muted-foreground">• {String(item)}</li>)}
+        {list.map((item, i) => <li key={i} className="text-muted-foreground">• {item}</li>)}
       </ul>
     </div>
   );

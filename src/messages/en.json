@@ -70,6 +70,11 @@
     "mobileChat": "Chat",
     "mobileDashboard": "Dashboard",
     "generatingArtifact": "Generating",
+    "ideaSummaryTooltip": "A structured overview of your startup idea: the core problem it solves, who it's for, and how to categorize it.",
+    "competitorsTooltip": "Direct and indirect competitors in your space, their strengths, weaknesses, pricing, and how closely they overlap with your idea.",
+    "uvpTooltip": "Your Unique Value Proposition — a clear statement of what makes your solution different and better than existing alternatives.",
+    "leanCanvasTooltip": "A one-page business model covering the 8 key building blocks of your startup: problem, solution, metrics, channels, segments, costs, revenue, and unfair advantage.",
+    "scoreTooltip": "Overall validation score (0–100) across 6 weighted criteria: market size, problem severity, uniqueness, feasibility, competition level, and monetization clarity.",
     "noCompetitors": "No direct competitors found",
     "noCompetitorsHint": "This could be a blue ocean opportunity or an untapped market"
   },

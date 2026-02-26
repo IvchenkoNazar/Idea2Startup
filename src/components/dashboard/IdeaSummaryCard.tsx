@@ -20,6 +20,7 @@ export function IdeaSummaryCard({ data }: Props) {
     <CollapsibleCard
       title={<>💡 {t("ideaSummary")}</>}
       extra={<Badge className="bg-primary/15 text-primary hover:bg-primary/20 border-0 text-[10px]">{data.category}</Badge>}
+      tooltip={t("ideaSummaryTooltip")}
       contentClassName="space-y-3"
     >
       <h3 className="font-bold text-base leading-tight">{data.title}</h3>

@@ -13,10 +13,10 @@ type Criterion = {
 type Props = {
   data: {
     total?: number;
-    score?: number;       // AI sometimes uses "score" instead of "total"
+    score?: number;
     overall?: number;
-    criteria?: Criterion[];
-    breakdown?: Criterion[];
+    criteria?: unknown;
+    breakdown?: unknown;
     verdict?: string;
     recommendations?: unknown;
   };
@@ -48,7 +48,7 @@ export function ScoreCard({ data }: Props) {
   const dashOffset = circumference - (total / 100) * circumference;
 
   return (
-    <CollapsibleCard title={<>📊 {t("score")}</>}>
+    <CollapsibleCard title={<>📊 {t("score")}</>} tooltip={t("scoreTooltip")}>
       {/* Circular score ring */}
       <div className="flex items-center justify-center py-2">
         <div className="relative">
@@ -74,20 +74,17 @@ export function ScoreCard({ data }: Props) {
       {/* Criteria bars */}
       {criteria.length > 0 && (
         <div className="space-y-3">
-          {criteria.map((c) => {
+          {criteria.map((c, i) => {
             const s = Number(c.score) || 0;
             const barColor = s >= 70 ? "bg-green-500" : s >= 50 ? "bg-yellow-500" : "bg-red-500";
             return (
-              <div key={c.name}>
+              <div key={i}>
                 <div className="flex items-center justify-between mb-1">
                   <span className="text-xs font-medium">{c.name}</span>
                   <span className="text-xs font-semibold tabular-nums">{s}/100</span>
                 </div>
                 <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
-                  <div
-                    className={`h-full rounded-full transition-all duration-700 ${barColor}`}
-                    style={{ width: `${s}%` }}
-                  />
+                  <div className={`h-full rounded-full transition-all duration-700 ${barColor}`} style={{ width: `${s}%` }} />
                 </div>
                 {c.explanation && (
                   <p className="text-xs text-muted-foreground mt-1">{c.explanation}</p>
