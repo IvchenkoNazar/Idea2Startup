@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { LandingNavbar } from "@/components/landing/LandingNavbar";
@@ -204,6 +205,30 @@ export default async function Home() {
           </Accordion>
         </div>
       </section>
+
+      {/* FOOTER CTA */}
+      <section className="relative py-28 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-indigo-950 to-violet-950" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-indigo-500/20 rounded-full blur-3xl" />
+        <div className="relative z-10 max-w-2xl mx-auto text-center px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-3">{t("ctaTitle")}</h2>
+          <p className="text-white/60 text-lg mb-8">{t("ctaSubtitle")}</p>
+          <Button asChild size="lg" className="text-base px-10 bg-indigo-600 hover:bg-indigo-500 text-white border-0">
+            <Link href="/login">{t("ctaButton")}</Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t border-white/10 bg-slate-950 py-8">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-white/40">
+          <div className="flex items-center gap-2">
+            <Image src="/logo.svg" alt="Idea2Startup" width={20} height={20} />
+            <span>{t("footerCopy")}</span>
+          </div>
+          <span>{t("footerMade")}</span>
+        </div>
+      </footer>
     </div>
   );
 }
