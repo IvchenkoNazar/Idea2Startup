@@ -51,6 +51,36 @@ export default async function Home() {
           <p className="text-sm text-white/40 tracking-wide">{t("heroTrust")}</p>
         </div>
       </section>
+
+      {/* HOW IT WORKS */}
+      <section id="how-it-works" className="py-24 bg-slate-900">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-4">{t("howTitle")}</h2>
+            <p className="text-white/60 text-lg">{t("howSubtitle")}</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: "💡", num: 1, title: t("step1Title"), desc: t("step1Desc") },
+              { icon: "🔍", num: 2, title: t("step2Title"), desc: t("step2Desc") },
+              { icon: "🏆", num: 3, title: t("step3Title"), desc: t("step3Desc") },
+              { icon: "💎", num: 4, title: t("step4Title"), desc: t("step4Desc") },
+              { icon: "📋", num: 5, title: t("step5Title"), desc: t("step5Desc") },
+              { icon: "📊", num: 6, title: t("step6Title"), desc: t("step6Desc") },
+            ].map((step) => (
+              <div key={step.num} className="relative rounded-xl border border-white/10 bg-white/5 p-6 hover:bg-white/8 hover:border-white/20 transition-all">
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-2xl">{step.icon}</span>
+                  <span className="flex h-6 w-6 items-center justify-center rounded-full bg-indigo-500/20 text-indigo-400 text-xs font-bold">{step.num}</span>
+                </div>
+                <h3 className="font-semibold text-white mb-1">{step.title}</h3>
+                <p className="text-sm text-white/50">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
