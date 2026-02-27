@@ -1,4 +1,10 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Idea2Startup
+
+AI-powered platform for validating and developing startup ideas.
+
+This project was built as a learning exercise to explore how AI agents can assist in app development. The entire codebase was developed with the help of [Claude Code](https://claude.ai/code), Anthropic's CLI coding agent.
+
+Built with [Next.js](https://nextjs.org), bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
 
