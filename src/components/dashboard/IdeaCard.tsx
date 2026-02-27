@@ -13,6 +13,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { toast } from "sonner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -48,12 +49,18 @@ export function IdeaCard({ idea, locale, onArchive, onRestore, onDelete }: Props
 
   function handleArchive(e: React.MouseEvent) {
     e.preventDefault();
-    startTransition(() => onArchive(idea.id));
+    startTransition(async () => {
+      await onArchive(idea.id);
+      toast(t("dashboard.toastArchived"));
+    });
   }
 
   function handleRestore(e: React.MouseEvent) {
     e.preventDefault();
-    startTransition(() => onRestore(idea.id));
+    startTransition(async () => {
+      await onRestore(idea.id);
+      toast(t("dashboard.toastRestored"));
+    });
   }
 
   function handleDeleteClick(e: React.MouseEvent) {
@@ -62,7 +69,10 @@ export function IdeaCard({ idea, locale, onArchive, onRestore, onDelete }: Props
   }
 
   function handleDeleteConfirm() {
-    startTransition(() => onDelete(idea.id));
+    startTransition(async () => {
+      await onDelete(idea.id);
+      toast(t("dashboard.toastDeleted"));
+    });
   }
 
   return (
