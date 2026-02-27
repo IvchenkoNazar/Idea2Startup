@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { LandingNavbar } from "@/components/landing/LandingNavbar";
 
 export default async function Home() {
@@ -170,6 +171,37 @@ export default async function Home() {
           </div>
 
           <p className="text-center text-sm text-white/30 mt-4">{t("mockupCaption")}</p>
+        </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="py-24 bg-slate-900">
+        <div className="max-w-3xl mx-auto px-6">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center mb-12">{t("faqTitle")}</h2>
+
+          <Accordion type="single" collapsible defaultValue="faq-0" className="space-y-2">
+            {[
+              { q: t("faq1Q"), a: t("faq1A") },
+              { q: t("faq2Q"), a: t("faq2A") },
+              { q: t("faq3Q"), a: t("faq3A") },
+              { q: t("faq4Q"), a: t("faq4A") },
+              { q: t("faq5Q"), a: t("faq5A") },
+              { q: t("faq6Q"), a: t("faq6A") },
+            ].map((item, i) => (
+              <AccordionItem
+                key={i}
+                value={`faq-${i}`}
+                className="rounded-xl border border-white/10 bg-white/5 px-4 data-[state=open]:bg-white/8 data-[state=open]:border-indigo-500/30 transition-all"
+              >
+                <AccordionTrigger className="text-white hover:no-underline hover:text-indigo-300 text-left py-4">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-white/60 pb-4 leading-relaxed">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
     </div>
