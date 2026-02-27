@@ -93,7 +93,12 @@
     "deleteConfirmTitle": "Видалити \"{title}\"?",
     "deleteConfirmBody": "Це назавжди видалить ідею та всю її історію чату. Цю дію не можна скасувати.",
     "noArchivedIdeas": "Архів порожній.",
-    "noArchivedIdeasHint": "Архівуйте ідеї, над якими не хочете працювати зараз."
+    "noArchivedIdeasHint": "Архівуйте ідеї, над якими не хочете працювати зараз.",
+    "toastArchived": "Ідею архівовано",
+    "toastRestored": "Ідею відновлено",
+    "toastDeleted": "Ідею видалено",
+    "sortByDate": "Останнє оновлення",
+    "sortByScore": "Оцінка"
   },
   "stages": {
     "capture": "Опис ідеї",
