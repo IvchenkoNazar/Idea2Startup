@@ -107,6 +107,71 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* MOCKUP */}
+      <section className="py-24 bg-gradient-to-b from-slate-900 to-slate-950">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl sm:text-4xl font-bold mb-3">{t("mockupTitle")}</h2>
+            <p className="text-white/60">{t("mockupSubtitle")}</p>
+          </div>
+
+          {/* Browser chrome */}
+          <div className="rounded-xl border border-white/10 shadow-2xl shadow-indigo-500/10 overflow-hidden">
+            {/* Browser top bar */}
+            <div className="flex items-center gap-2 bg-slate-800 px-4 py-3 border-b border-white/10">
+              <div className="flex gap-1.5">
+                <div className="h-3 w-3 rounded-full bg-red-500/80" />
+                <div className="h-3 w-3 rounded-full bg-yellow-500/80" />
+                <div className="h-3 w-3 rounded-full bg-green-500/80" />
+              </div>
+              <div className="flex-1 mx-4 rounded-md bg-slate-700 h-6 flex items-center px-3">
+                <span className="text-xs text-white/40">idea2startup.com/idea/...</span>
+              </div>
+            </div>
+
+            {/* App mockup */}
+            <div className="flex bg-slate-900 h-80">
+              {/* Chat side */}
+              <div className="flex-1 border-r border-white/10 p-4 flex flex-col gap-3">
+                <div className="text-xs text-white/30 font-medium uppercase tracking-wide mb-2">Chat</div>
+                <div className="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-indigo-600/80 px-3 py-2 text-xs text-white">
+                  I want to build an AI fitness coaching app
+                </div>
+                <div className="max-w-[80%] rounded-2xl rounded-tl-sm bg-white/10 px-3 py-2 text-xs text-white/80">
+                  Great idea! I found 4 competitors. Freeletics and Fitbod are the main ones, but none offer real-time form correction...
+                </div>
+                <div className="ml-auto max-w-[80%] rounded-2xl rounded-tr-sm bg-indigo-600/80 px-3 py-2 text-xs text-white">
+                  What&apos;s my overall score?
+                </div>
+                <div className="max-w-[80%] rounded-2xl rounded-tl-sm bg-white/10 px-3 py-2 text-xs text-white/80">
+                  Your idea scores <span className="text-green-400 font-bold">74/100</span> — strong market fit with a clear gap...
+                </div>
+              </div>
+
+              {/* Dashboard side */}
+              <div className="w-56 p-3 flex flex-col gap-2 overflow-hidden">
+                <div className="text-xs text-white/30 font-medium uppercase tracking-wide mb-1">Live Dashboard</div>
+                {[
+                  { icon: "💡", label: "Idea Summary", color: "border-indigo-500/30" },
+                  { icon: "🔍", label: "Competitors · 4", color: "border-blue-500/30" },
+                  { icon: "💎", label: "UVP", color: "border-violet-500/30" },
+                  { icon: "📊", label: "Score · 74/100", color: "border-green-500/30" },
+                ].map((card) => (
+                  <div key={card.label} className={`rounded-lg border ${card.color} bg-white/5 px-2.5 py-2`}>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm">{card.icon}</span>
+                      <span className="text-xs text-white/70 font-medium">{card.label}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-sm text-white/30 mt-4">{t("mockupCaption")}</p>
+        </div>
+      </section>
     </div>
   );
 }
