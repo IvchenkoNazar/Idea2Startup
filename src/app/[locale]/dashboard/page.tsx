@@ -2,10 +2,8 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { getTranslations } from "next-intl/server";
-import Link from "next/link";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { DashboardTabs } from "@/components/dashboard/DashboardTabs";
 
 export default async function DashboardPage({
   params,
@@ -24,7 +22,7 @@ export default async function DashboardPage({
   const { data: ideas } = await supabase
     .from("ideas")
     .select("*")
-    .eq("status", "active")
+    .in("status", ["active", "archived"])
     .order("updated_at", { ascending: false });
 
   async function createIdea(formData: FormData) {
@@ -32,20 +30,44 @@ export default async function DashboardPage({
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
-
     const title = formData.get("title") as string;
     if (!title?.trim()) return;
-
     const { data: idea } = await supabase
       .from("ideas")
       .insert({ title: title.trim(), user_id: user.id })
       .select("id")
       .single();
-
     if (idea) {
       revalidatePath(`/${locale}/dashboard`);
       redirect(`/${locale}/idea/${idea.id}`);
     }
+  }
+
+  async function archiveIdea(id: string) {
+    "use server";
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await supabase.from("ideas").update({ status: "archived" }).eq("id", id).eq("user_id", user.id);
+    revalidatePath(`/${locale}/dashboard`);
+  }
+
+  async function restoreIdea(id: string) {
+    "use server";
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await supabase.from("ideas").update({ status: "active" }).eq("id", id).eq("user_id", user.id);
+    revalidatePath(`/${locale}/dashboard`);
+  }
+
+  async function deleteIdea(id: string) {
+    "use server";
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return;
+    await supabase.from("ideas").delete().eq("id", id).eq("user_id", user.id);
+    revalidatePath(`/${locale}/dashboard`);
   }
 
   return (
@@ -66,39 +88,13 @@ export default async function DashboardPage({
         </Button>
       </form>
 
-      {!ideas || ideas.length === 0 ? (
-        <Card className="border-dashed">
-          <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-            <p className="text-muted-foreground mb-2">{t("dashboard.noIdeas")}</p>
-            <p className="text-sm text-muted-foreground">{t("dashboard.noIdeasHint")}</p>
-          </CardContent>
-        </Card>
-      ) : (
-        <div className="grid gap-3">
-          {ideas.map((idea) => (
-            <Link key={idea.id} href={`/${locale}/idea/${idea.id}`}>
-              <Card className="hover:bg-accent transition-colors cursor-pointer">
-                <CardContent className="flex items-center justify-between py-4">
-                  <div>
-                    <p className="font-medium">{idea.title}</p>
-                    <p className="text-xs text-muted-foreground mt-0.5">
-                      {new Date(idea.updated_at).toLocaleDateString(locale)}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Badge variant="secondary">
-                      {t(`stages.${idea.stage}` as Parameters<typeof t>[0])}
-                    </Badge>
-                    {idea.score !== null && (
-                      <span className="text-sm font-semibold">{idea.score}/100</span>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      )}
+      <DashboardTabs
+        ideas={ideas ?? []}
+        locale={locale}
+        onArchive={archiveIdea}
+        onRestore={restoreIdea}
+        onDelete={deleteIdea}
+      />
     </div>
   );
 }
