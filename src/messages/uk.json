@@ -85,7 +85,15 @@
     "noIdeasHint": "Введіть назву ідеї вище і натисніть Enter щоб почати!",
     "score": "Оцінка",
     "stage": "Етап",
-    "archived": "Архів"
+    "archived": "Архів",
+    "active": "Активні",
+    "archiveIdea": "Архівувати",
+    "restoreIdea": "Відновити",
+    "deleteIdea": "Видалити",
+    "deleteConfirmTitle": "Видалити \"{title}\"?",
+    "deleteConfirmBody": "Це назавжди видалить ідею та всю її історію чату. Цю дію не можна скасувати.",
+    "noArchivedIdeas": "Архів порожній.",
+    "noArchivedIdeasHint": "Архівуйте ідеї, над якими не хочете працювати зараз."
   },
   "stages": {
     "capture": "Опис ідеї",

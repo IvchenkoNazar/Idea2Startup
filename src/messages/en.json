@@ -85,7 +85,15 @@
     "noIdeasHint": "Type your idea above and press Enter to start brainstorming!",
     "score": "Score",
     "stage": "Stage",
-    "archived": "Archived"
+    "archived": "Archived",
+    "active": "Active",
+    "archiveIdea": "Archive",
+    "restoreIdea": "Restore",
+    "deleteIdea": "Delete",
+    "deleteConfirmTitle": "Delete \"{title}\"?",
+    "deleteConfirmBody": "This will permanently delete the idea and all its chat history. This action cannot be undone.",
+    "noArchivedIdeas": "No archived ideas.",
+    "noArchivedIdeasHint": "Archive ideas you want to keep but not work on right now."
   },
   "stages": {
     "capture": "Idea Capture",
